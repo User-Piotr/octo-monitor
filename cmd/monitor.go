@@ -30,8 +30,6 @@ var monitorCmd = &cobra.Command{
 		defer cancel()
 
 		tasks := make(chan string, len(args))
-		results := make(chan string, len(args))
-		numWorkers := len(args)
 
 		for _, url := range args {
 			if url != "" {
@@ -39,6 +37,9 @@ var monitorCmd = &cobra.Command{
 			}
 		}
 		close(tasks)
+
+		numWorkers := len(tasks)
+		results := make(chan string, len(tasks))
 
 		var wg sync.WaitGroup
 

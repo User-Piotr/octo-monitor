@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"io"
 	"net"
 	"net/http"
 )
@@ -29,6 +30,7 @@ func RunMonitoring(ctx context.Context, url string) string {
 		}
 	}
 	defer resp.Body.Close()
+	defer io.Copy(io.Discard, resp.Body)
 
 	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		return "UP"
