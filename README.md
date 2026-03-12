@@ -2,8 +2,6 @@
 
 ## Project Overview
 
-
-
 ## Summary
 
 ## References
